@@ -1,5 +1,4 @@
 from flask_classful import FlaskView, route
-import jsonpickle
 import json
 from flask import abort
 from flask import jsonify
