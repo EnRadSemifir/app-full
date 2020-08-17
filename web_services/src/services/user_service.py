@@ -23,7 +23,7 @@ def get_user_by_name(user_name):
 def create_user(json):
     user_dto = json_to_dto(json)
     result = ur.create_user(dto_to_model(user_dto))
-    user = model_to_dto(user)
+    user = model_to_dto(result)
     return user
 
 
