@@ -19,9 +19,10 @@ services:
             - '5000:5000'
 
     database:
-        image: mysql
+        image: mariadb
         environment: 
             MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: users
         ports:
             - '3306:3306'
         volumes: 
