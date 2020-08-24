@@ -9,11 +9,10 @@ const submit = (event) => {
     }
 
     const myHeaders = new Headers()
+    myHeaders.append('Content-Type', 'application/json')
 
-    myHeaders.append('Access-Control-Allow-Origin', '*')
-
-    fetch('http://127.0.0.1:5000/api/users', {
-        method: 'POST',
+    fetch('http://192.168.99.100:5000/api/users/', {
+        method: "POST",
         body: JSON.stringify(user),
         headers: myHeaders
     }).then(resp => resp.json()).then(user => console.log(user))

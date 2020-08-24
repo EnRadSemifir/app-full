@@ -1,8 +1,6 @@
 from flask_classful import FlaskView, route
 import json
-from flask import abort
-from flask import jsonify
-from flask import request
+from flask import abort, jsonify, request, make_response
 import services.user_service as us
 
 
@@ -25,11 +23,14 @@ class UserControler(FlaskView):
 
     @route('/', methods=['POST'])
     def create_user(self):
-        return json.dumps(us.create_user(request.json).__dict__), 201
+        response = make_response(json.dumps(
+            us.create_user(request.get_json()).__dict__), 201)
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
 
     @route('/<int:user_id>', methods=['PUT'])
     def update_user(self, user_id):
-        return json.dumps(us.update_user(user_id, request.json).__dict__), 200
+        return json.dumps(us.update_user(user_id, request.get_json()).__dict__), 200
 
     @route('/<int:user_id>', methods=['DELETE'])
     def delete_user(self, user_id):

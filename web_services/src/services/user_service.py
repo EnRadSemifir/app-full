@@ -6,6 +6,7 @@ import repositories.user_repo as ur
 
 def get_users():
     result = ur.get_users()
+    print(result)
     users = []
     for user in result:
         users.append(model_to_dto(user))
@@ -21,6 +22,8 @@ def get_user_by_name(user_name):
 
 
 def create_user(json):
+    print('coucou')
+    print(json)
     user_dto = json_to_dto(json)
     result = ur.create_user(dto_to_model(user_dto))
     user = model_to_dto(result)
