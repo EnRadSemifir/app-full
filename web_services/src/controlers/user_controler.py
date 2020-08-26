@@ -25,7 +25,6 @@ class UserControler(FlaskView):
     def create_user(self):
         response = make_response(json.dumps(
             us.create_user(request.get_json()).__dict__), 201)
-        response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
 
     @route('/<int:user_id>', methods=['PUT'])

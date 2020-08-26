@@ -1,15 +1,21 @@
-const users = [
-    { lastname: 'Radnaï', firstname: 'Enzo', birth: "12/10/1989", },
-    { lastname: 'Doe', firstname: 'John', birth: "99/99/9999", },
-]
-
-const searchUser = () => {
-    const user = document.querySelector("#searchInput").value
-    console.log('user : ', user)
+class SearchUser {
+    constructor(lastname, firstname, birth) {
+        this.lastname = lastname
+        this.firstname = firstname
+        this.birth = birth
+    }
 }
 
-const renderUsers = () => {
+const renderUsers = (response) => {
+    data = response.map(user => JSON.parse(user))
+    users = data.map(user => new SearchUser(user.lastname, user.firstname, user.birth))
     const table = document.querySelector('#userTable')
+    if (table.rows.length > 1) {
+        for (let i = 1; i < table.rows.length; i++) {
+            table.deleteRow(i)
+        }
+    }
+
     for (user of users) {
         const tr = table.insertRow()
         for (key in user) {
@@ -17,7 +23,26 @@ const renderUsers = () => {
             cell.innerHTML = user[key]
         }
     }
+
 }
 
+const allUsers = async () => {
+    response = await (await fetch('http://192.168.99.100:5000/api/users/')).json()
+    renderUsers(response)
+}
+
+const searchUser = async () => {
+    const user = document.querySelector("#searchInput").value
+    if (user === "") {
+        allUsers()
+    }
+    else {
+        response = await (await fetch(`http://192.168.99.100:5000/api/users/${user}`)).json()
+        renderUsers(response)
+    }
+}
+
+
+
 document.querySelector("#searchButton").addEventListener('click', searchUser)
-renderUsers()
+searchUser()
