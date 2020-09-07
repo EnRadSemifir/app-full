@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from controlers.user_controler import UserControler
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@192.168.99.100:3306/users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@database:3306/users'
 db = SQLAlchemy(app)
 UserControler.register(app)
 

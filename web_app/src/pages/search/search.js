@@ -27,7 +27,7 @@ const renderUsers = (response) => {
 }
 
 const allUsers = async () => {
-    response = await (await fetch('http://192.168.99.100:5000/api/users/')).json()
+    response = await (await fetch('http://localhost:5000/api/users/')).json()
     renderUsers(response)
 }
 
@@ -37,7 +37,7 @@ const searchUser = async () => {
         allUsers()
     }
     else {
-        response = await (await fetch(`http://192.168.99.100:5000/api/users/${user}`)).json()
+        response = await (await fetch(`http://localhost:5000/api/users/${user}`)).json()
         renderUsers(response)
     }
 }
