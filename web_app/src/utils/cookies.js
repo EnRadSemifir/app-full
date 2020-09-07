@@ -7,7 +7,7 @@ const setCookie = (cname, cvalue, exdays) => {
 
 const checkCookie = () => {
     var username = getCookie("username");
-    if (username != "") {
+    if (username != "" ) {
         return true
     } else {
         return false
