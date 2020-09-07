@@ -5,13 +5,24 @@ const setCookie = (cname, cvalue, exdays) => {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-const checkCookie = () => {
+async function checkCookie() {
     var username = getCookie("username");
-    if (username != "" ) {
-        return true
-    } else {
-        return false
-    }
+    var password = getCookie("password");
+    const myHeaders = new Headers()
+    myHeaders.append('Content-Type', 'application/json')
+    myHeaders.append('Access-Control-Allow-Origin', '*')
+
+    await fetch('http://localhost:5000/api/users/' + username, {
+        method: "GET",
+        headers: myHeaders
+    }).then(resp => resp.json()).then(users => {
+        u = JSON.parse(users[0])
+        if (password == u.password) {
+            return true
+        } else {
+            return false
+        }
+    })
 }
 
 const getCookie = (cname) => {

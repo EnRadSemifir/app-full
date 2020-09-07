@@ -19,6 +19,7 @@ const login = (event) => {
             if (verif_hash(loginInfo.login, hashage(loginInfo.password), JSON.parse(users[0]))) {
                 alert("Vous êtes connecté !")
                 setCookie("username", loginInfo.login, 1)
+                setCookie("password", hashage(loginInfo.password), 1)
             } else {
                 alert("Problème Login/Mot de passe.")
             }
