@@ -13,8 +13,8 @@ def get_users():
     return users
 
 
-def get_user_by_name(user_name):
-    result = ur.get_user_by_name(user_name)
+def get_user_by_login(login):
+    result = ur.get_user_by_login(login)
     users = []
     for user in result:
         users.append(model_to_dto(user))

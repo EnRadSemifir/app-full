@@ -3,9 +3,8 @@ import json
 from flask import abort, jsonify, request, make_response
 import services.user_service as us
 
-
 class UserControler(FlaskView):
-    route_base = '/api/users'
+    route_base = 'api/users'
 
     @route('/')
     def get_users(self):
@@ -14,10 +13,10 @@ class UserControler(FlaskView):
             users.append(json.dumps(user.__dict__))
         return jsonify(users), 200
 
-    @route('/<string:user_name>')
-    def get_user_by_name(self, user_name):
+    @route('/<string:login>')
+    def get_user_by_login(self, login):
         users = []
-        for user in us.get_user_by_name(user_name):
+        for user in us.get_user_by_login(login):
             users.append(json.dumps(user.__dict__))
         return jsonify(users), 200
 

@@ -1,10 +1,16 @@
-const users = [
-    { id: 1, login: 'Enzal', email: 'enzo@semifir.com', },
-    { id: 2, login: 'JoDoe', email: 'jd@mail.fr', },
-]
+const users = []
 
 const deleteUser = event => {
-    console.log(event.target.id)
+    const myHeaders = new Headers()
+    myHeaders.append('Content-Type', 'application/json')
+    myHeaders.append('Access-Control-Allow-Origin', '*')
+
+    fetch('http://localhost:5000/api/users/' + event.target.id, {
+        method: "DELETE",
+        headers: myHeaders
+    }).then(() => {
+        window.location.reload()
+    })
 }
 
 const renderUsers = () => {
@@ -23,9 +29,17 @@ const renderUsers = () => {
 }
 
 const getUsers = () => {
-    fetch('http://127.0.0.1:5000/todos').then(resp => resp.json()).then(json => console.log(json))
+    fetch('http://localhost:5000/api/users').then(resp => resp.json()).then(users2 => {
+        for (user of users2) {
+            users.push(JSON.parse(user))
+        }
+        renderUsers()
+    })
 }
 
-// renderUsers()
-
-getUsers()
+if (checkCookie()) {
+    getUsers();
+}
+else {
+    document.getElementById("message").innerHTML = "Connectez-vous pour accéder à cette page!"
+}
