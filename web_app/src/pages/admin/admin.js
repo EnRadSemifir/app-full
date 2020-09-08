@@ -5,7 +5,7 @@ const deleteUser = event => {
     myHeaders.append('Content-Type', 'application/json')
     myHeaders.append('Access-Control-Allow-Origin', '*')
 
-    fetch('http://localhost:5000/api/users/' + event.target.id, {
+    fetch('https://localhost:5000/api/users/' + event.target.id, {
         method: "DELETE",
         headers: myHeaders
     }).then(() => {
@@ -29,7 +29,7 @@ const renderUsers = () => {
 }
 
 const getUsers = () => {
-    fetch('http://localhost:5000/api/users').then(resp => resp.json()).then(users2 => {
+    fetch('https://localhost:5000/api/users').then(resp => resp.json()).then(users2 => {
         for (user of users2) {
             users.push(JSON.parse(user))
         }

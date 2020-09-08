@@ -11,7 +11,7 @@ const login = (event) => {
     myHeaders.append('Content-Type', 'application/json')
     myHeaders.append('Access-Control-Allow-Origin', '*')
 
-    fetch('http://localhost:5000/api/users/' + loginInfo.login, {
+    fetch('https://localhost:5000/api/users/' + loginInfo.login, {
         method: "GET",
         headers: myHeaders
     }).then(resp => resp.json()).then(users => {

@@ -9,4 +9,4 @@ db = SQLAlchemy(app)
 UserControler.register(app)
 
 if __name__ == "main":
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', ssl_context=('cert.pem', 'key.pem'))
