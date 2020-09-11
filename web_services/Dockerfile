@@ -25,4 +25,6 @@ COPY ./src .
 # une fois que nous avons installé flask, 
 # cela donne accès à une commande shell du même nom
 # cette commande utilise la variable d'environne "FLASK_APP app.py" pour trouver le fichier
-CMD ["flask", "run", "--cert=cert.pem", "--key=key.pem"]
+# CMD ["flask", "run", "--cert=cert.pem", "--key=key.pem"]
+
+CMD ["flask", "run"]

@@ -1,3 +1,6 @@
+const IP = '192.168.99.100'
+const PROTOCOL = 'http'
+
 const submit = (event) => {
     event.preventDefault()
     const user = {}
@@ -16,11 +19,11 @@ const submit = (event) => {
     myHeaders.append('Content-Type', 'application/json')
     myHeaders.append('Access-Control-Allow-Origin', '*')
 
-    fetch('https://localhost:5000/api/users/', {
+    fetch(`${PROTOCOL}://${IP}:5000/api/users/`, {
         method: "GET",
     }).then(resp => resp.json()).then(users => {
         if (verif_user(user, users)) {
-            fetch('https://localhost:5000/api/users/', {
+            fetch(`${PROTOCOL}://${IP}:5000/api/users/`, {
                 method: "POST",
                 body: JSON.stringify(user),
                 headers: myHeaders

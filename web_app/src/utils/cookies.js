@@ -1,3 +1,6 @@
+// const IP = '192.168.99.100'
+// const PROTOCOL = 'http'
+
 const setCookie = (cname, cvalue, exdays) => {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -12,14 +15,20 @@ async function checkCookie() {
     myHeaders.append('Content-Type', 'application/json')
     myHeaders.append('Access-Control-Allow-Origin', '*')
 
-    await fetch('https://localhost:5000/api/users/' + username, {
+    await fetch(`${PROTOCOL}://${IP}:5000/api/users/` + username, {
         method: "GET",
         headers: myHeaders
     }).then(resp => resp.json()).then(users => {
-        u = JSON.parse(users[0])
-        if (password == u.password) {
+        const u = undefined
+        if (users.length > 0) {
+            u = JSON.parse(users[0])
+        }
+        if (u !== undefined && password == u?.password) {
+            console.log('true')
             return true
         } else {
+            console.log('false')
+
             return false
         }
     })

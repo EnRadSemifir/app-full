@@ -1,3 +1,6 @@
+const IP = '192.168.99.100'
+const PROTOCOL = 'http'
+
 const users = []
 
 const deleteUser = event => {
@@ -5,7 +8,7 @@ const deleteUser = event => {
     myHeaders.append('Content-Type', 'application/json')
     myHeaders.append('Access-Control-Allow-Origin', '*')
 
-    fetch('https://localhost:5000/api/users/' + event.target.id, {
+    fetch(`${PROTOCOL}://${IP}:5000/api/users/` + event.target.id, {
         method: "DELETE",
         headers: myHeaders
     }).then(() => {
@@ -29,17 +32,18 @@ const renderUsers = () => {
 }
 
 const getUsers = () => {
-    fetch('https://localhost:5000/api/users').then(resp => resp.json()).then(users2 => {
+    fetch(`${PROTOCOL}://${IP}:5000/api/users/`).then(resp => resp.json()).then(users2 => {
         for (user of users2) {
             users.push(JSON.parse(user))
         }
         renderUsers()
     })
 }
-
-if (checkCookie()) {
-    getUsers();
-}
-else {
-    document.getElementById("message").innerHTML = "Connectez-vous pour accéder à cette page!"
-}
+checkCookie().then(connected => {
+    if (connected) {
+        getUsers();
+    }
+    else {
+        document.getElementById("message").innerHTML = "Connectez-vous pour accéder à cette page!"
+    }
+})

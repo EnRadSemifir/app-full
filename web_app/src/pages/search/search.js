@@ -1,3 +1,6 @@
+const IP = '192.168.99.100'
+const PROTOCOL = 'http'
+
 class SearchUser {
     constructor(lastname, firstname, birth) {
         this.lastname = lastname
@@ -27,7 +30,7 @@ const renderUsers = (response) => {
 }
 
 const allUsers = async () => {
-    response = await (await fetch('http://localhost:5000/api/users/')).json()
+    response = await (await fetch(`${PROTOCOL}://${IP}:5000/api/users/`)).json()
     renderUsers(response)
 }
 
@@ -37,7 +40,7 @@ const searchUser = async () => {
         allUsers()
     }
     else {
-        response = await (await fetch(`http://localhost:5000/api/users/${user}`)).json()
+        response = await (await fetch(`${PROTOCOL}://${IP}:5000/api/users/${user}`)).json()
         renderUsers(response)
     }
 }

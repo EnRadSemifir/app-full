@@ -1,3 +1,6 @@
+const IP = '192.168.99.100'
+const PROTOCOL = 'http'
+
 const login = (event) => {
     event.preventDefault()
     const loginInfo = {}
@@ -11,7 +14,7 @@ const login = (event) => {
     myHeaders.append('Content-Type', 'application/json')
     myHeaders.append('Access-Control-Allow-Origin', '*')
 
-    fetch('https://localhost:5000/api/users/' + loginInfo.login, {
+    fetch(`${PROTOCOL}://${IP}:5000/api/users/` + loginInfo.login, {
         method: "GET",
         headers: myHeaders
     }).then(resp => resp.json()).then(users => {
@@ -23,7 +26,7 @@ const login = (event) => {
             } else {
                 alert("Problème Login/Mot de passe.")
             }
-        }else{
+        } else {
             alert("Ce login n'existe pas. Veuillez vous enregistrer.")
         }
     })
