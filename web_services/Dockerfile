@@ -11,7 +11,8 @@ ENV FLASK_RUN_HOST 0.0.0.0
 
 # RUN : permet d'exécuter une commande shell
 RUN apk add --no-cache gcc musl-dev linux-headers
-
+RUN apk add libffi-dev openssl-dev
+RUN apk --no-cache --update add build-base
 # COPY : permet de copier un fichier depuis l'OS hôte dans le conteneur
 COPY requirements.txt requirements.txt
 
@@ -24,4 +25,4 @@ COPY ./src .
 # une fois que nous avons installé flask, 
 # cela donne accès à une commande shell du même nom
 # cette commande utilise la variable d'environne "FLASK_APP app.py" pour trouver le fichier
-CMD ["flask", "run"]
+CMD ["flask", "run", "--cert=cert.pem", "--key=key.pem"]

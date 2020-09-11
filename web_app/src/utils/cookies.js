@@ -12,7 +12,7 @@ async function checkCookie() {
     myHeaders.append('Content-Type', 'application/json')
     myHeaders.append('Access-Control-Allow-Origin', '*')
 
-    await fetch('http://localhost:5000/api/users/' + username, {
+    await fetch('https://localhost:5000/api/users/' + username, {
         method: "GET",
         headers: myHeaders
     }).then(resp => resp.json()).then(users => {

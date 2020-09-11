@@ -16,11 +16,11 @@ const submit = (event) => {
     myHeaders.append('Content-Type', 'application/json')
     myHeaders.append('Access-Control-Allow-Origin', '*')
 
-    fetch('http://localhost:5000/api/users/', {
+    fetch('https://localhost:5000/api/users/', {
         method: "GET",
     }).then(resp => resp.json()).then(users => {
         if (verif_user(user, users)) {
-            fetch('http://localhost:5000/api/users/', {
+            fetch('https://localhost:5000/api/users/', {
                 method: "POST",
                 body: JSON.stringify(user),
                 headers: myHeaders
